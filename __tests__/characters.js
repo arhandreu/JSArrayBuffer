@@ -1,19 +1,17 @@
 import Daemon from '../src/characters';
 
+const hero = new Daemon('andrew');
 
+test('setAttack', () => {
+  hero.attack = 100;
+  expect(hero.attack).toBe(100);
+});
 
 test.each([
-    [4, false, 7],
-    [2, true, 5],    
-  ])('Вычисление атаки на %s клеток, со статусом %s', (countSquare, stoned, expected) => {
-    const hero = new Daemon('andrew')
-    hero.stoned = stoned
-    hero.attack = countSquare
-    expect(hero.attack).toBe(expected)
-  });
-  
-  test('statusStoned', () => {
-    const hero = new Daemon('andrew')
-    const status = false;
-    expect(hero.stoned).toBe(status);
-  });
+  [4, false, 70],
+  [4, true, 60],
+])('Вычисление атаки на %s клеток, со статусом %s', (distance, stoned, expected) => {
+  hero.stoned = stoned;
+  hero.distance = distance;
+  expect(hero.attack).toBe(expected);
+});

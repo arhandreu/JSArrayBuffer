@@ -1,11 +1,13 @@
 import ArrayBufferConverter from '../src/arraybuffer';
 
+const buf = new ArrayBufferConverter();
+const bufString = 'Andrew';
+
 test('toBuf', () => {
-  const bufString = 'Andrew';
-  expect(ArrayBufferConverter.load(bufString)).toBeInstanceOf(ArrayBuffer);
+  buf.load(bufString);
+  expect(buf.buffer).toBeInstanceOf(ArrayBuffer);
 });
 
 test('toString', () => {
-  const bufString = 'Andrew';
-  expect(ArrayBufferConverter.toString(ArrayBufferConverter.load(bufString))).toEqual(bufString);
+  expect(buf.toString()).toEqual(bufString);
 });

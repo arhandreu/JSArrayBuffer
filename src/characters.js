@@ -6,27 +6,22 @@ class Character {
     this.health = health;
     this._attack = attack;
     this.defence = defence;
-    this._stoned = false;
-  }
-
-  get stoned() {
-    return this._stoned;
-  }
-
-  set stoned(value) {
-    this._stoned = value;
+    this.stoned = false;
+    this.distance = 1;
   }
 
   get attack() {
-    return this._attack;
+    let attack = this._attack;
+    if (!this.stoned) {
+      attack *= (1 - 0.1 * (this.distance - 1));
+    } else {
+      attack = attack * (1 - 0.1 * (this.distance - 1)) - Math.log2(this.distance) * 5;
+    }
+    return Math.round(attack);
   }
 
-  set attack(countSquare = 1) {
-    if (!this._stoned) {
-      this._attack *= (1 - 0.1 * (countSquare - 1));
-    } else {
-      this._attack -= Math.log2(countSquare) * 5;
-    }
+  set attack(attack) {
+    this._attack = attack;
   }
 }
 
